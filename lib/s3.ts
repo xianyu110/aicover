@@ -3,10 +3,17 @@ import { Readable } from "stream";
 import axios from "axios";
 import fs from "fs";
 
-AWS.config.update({
+const awsConfig = {
   accessKeyId: process.env.AWS_AK,
   secretAccessKey: process.env.AWS_SK,
-});
+  region: process.env.AWS_REGION || 'us-west-1',
+};
+
+if (!awsConfig.accessKeyId || !awsConfig.secretAccessKey) {
+  throw new Error('AWS credentials are not configured properly');
+}
+
+AWS.config.update(awsConfig);
 
 const s3 = new AWS.S3();
 

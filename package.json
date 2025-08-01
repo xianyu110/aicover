@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "build:check": "npm run type-check && npm run lint && npm run build",
+    "deploy:check": "node -e \"require('./lib/env-validation.ts')\""
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.5",
